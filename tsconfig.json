@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    /* File Layout */
+    "rootDir": "./web",
+    "outDir": "./web/dist",
+
+    /* Environment Settings */
+    "target": "es2020",              // مناسب للمتصفحات الحديثة
+    "module": "es2020",              // موديول ES حديث للويب
+    "lib": ["dom", "es2020"],        // دعم DOM + ES2020 APIs
+    "moduleResolution": "bundler",   // أبسط حاجة للويب
+
+    /* Output Options */
+    "sourceMap": true,               // لتسهيل الـ debugging
+    "declaration": false,            // مش محتاج .d.ts لمشروع ويب عادي
+    "declarationMap": false,
+
+    /* Type Checking */
+    "strict": true,                  // وضع صارم للـ types
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+
+    /* Performance */
+    "skipLibCheck": true,            // أسرع كومبايل
+
+    /* Module / Syntax */
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true
+  },
+  "include": ["web/**/*.ts"],        // يشمل كل ملفات TS داخل web
+  "exclude": ["node_modules"]        // استبعاد مجلد node_modules
+}

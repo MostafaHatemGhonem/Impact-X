@@ -1,0 +1,853 @@
+:root {
+  --maincolor: #fff;
+  --accentColor: #00d4ff;
+  --dangerColor: #ca0620;
+  --mainRadial: radial-gradient(circle at center, #372B7C 0%, #1a1635 50%, #0a0a0f 100%);
+  --cardBg: rgba(55, 43, 124, 0.3);
+  --glowColor: rgba(0, 212, 255, 0.5);
+  --mainColorShadow: #A1AEB1;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: var(--maincolor);
+  scroll-behavior: smooth;
+}
+
+@font-face {
+  font-family: "Montserrat-Black";
+  src: url("./assit/Font/Montserrat/static/Montserrat-Black.ttf") format("truetype");
+}
+
+body {
+  /* background-image: url(./assit/Images/Untitled2.jpeg); */
+  background-image: url(./assit/Images/starsScreen.png);
+  image-rendering: optimizeQuality;
+  background-size: cover;
+  background-position: center;
+  background-repeat: repeat;
+  background-attachment: fixed;
+  font-family: "Montserrat-Black", sans-serif;
+  overflow-x: hidden;
+}
+
+/* Meteor Animation */
+.meteor {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 15%;
+  max-width: 150px;
+  z-index: 999;
+  filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.8));
+  pointer-events: none;
+}
+
+/* Page Sections */
+.pageOne,
+.pageTwo,
+.pageThree,
+.pageFour,
+.pageFive {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* Logo */
+.logo {
+  font-size: clamp(1rem, 3vw, 1.9rem);
+  font-weight: 900;
+  margin: 50px 10px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  background: linear-gradient(90deg, var(--accentColor), #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: glow 3s ease-in-out infinite;
+  position: absolute;
+  top: 0;
+}
+
+.containerTitle {
+  text-align: center;
+  margin-top: 100px;
+}
+
+.mainHeader {
+  opacity: 0;
+  font-weight: 900; 
+  margin: auto;
+  font-size: clamp(1rem, 3vw, 2.4rem);
+  margin-bottom: 200px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  transform-origin: center;
+  animation: boom 3s cubic-bezier(.2,.9,.2,1) forwards;
+  
+}
+
+.maintitle {
+  font-size: clamp(1.5rem, 5vw, 3rem);
+  width: 90%;
+  max-width: 800px;
+  margin: 20px 10px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: normal;
+  line-height: 1.4;
+  text-transform: capitalize;
+  text-shadow: 0 0 0px rgba(0, 212, 255, 0.5);
+  animation: glowTitle 3s ease-in-out infinite;
+}
+
+/* Scroll Down Arrow */
+.mainangle {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  transform: translateX(-50%);
+  font-size: 2rem;
+  animation: updown 0.6s linear infinite;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.mainangle:hover {
+  color: var(--accentColor);
+  transform: translateX(-50%) scale(1.2);
+}
+
+.mainangle a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Page Two - Earth Video */
+.videosEarth {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.videosEarth video {
+  width: 80%;
+  max-width: 800px;
+  filter: drop-shadow(0 0 0px #A1AEB1);
+  animation: float 6s ease-in-out infinite;
+}
+
+.title {
+  text-align: center;
+  margin: 40px auto;
+}
+
+.mainTitlePage,
+.titlePage2 {
+  font-size: clamp(1.2rem, 4vw, 2rem);
+  margin: 20px 0;
+}
+
+/* Page Three - Choice Section */
+.Choise {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.videosChoise {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.saveEarth,
+.dystriodEarth {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.saveEarth::before,
+.dystriodEarth::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, transparent, rgba(0, 212, 255, 0.2));
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.saveEarth:hover,
+.dystriodEarth:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 0 50px var(--glowColor);
+}
+
+.saveEarth:hover::before,
+.dystriodEarth:hover::before {
+  opacity: 1;
+}
+
+.videosChoise video {
+  width: 100%;
+  display: block;
+  border-radius: 20px;
+}
+
+/* Buttons */
+.buttonsEarth {
+  width: 100%;
+  max-width: 800px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.saveEarthBtn,
+.dystriodEarthBtn,
+.addYourAstreriod,
+.choseYourAstreriod,
+.generate,
+.launchButton {
+    background: var(--mainRadial);
+    border-radius: 30px;
+    padding: 15px 30px;
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+
+}
+
+.saveEarthBtn,
+.dystriodEarthBtn {
+    background: #575757bf;
+    border: none;
+}
+
+/* .saveEarthBtn::before,
+.dystriodEarthBtn::before,
+.addYourAstreriod::before,
+.choseYourAstreriod::before,
+.generate::before,
+.launchButton::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(0, 212, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+} */
+
+  .saveEarthBtn:hover::before,
+  .dystriodEarthBtn:hover::before,
+  .addYourAstreriod:hover::before,
+  .choseYourAstreriod:hover::before,
+  .generate:hover::before,
+  .launchButton:hover::before {
+    width: 300px;
+    height: 300px;
+  }
+
+.saveEarthBtn:hover,
+.dystriodEarthBtn:hover,
+.addYourAstreriod:hover,
+.choseYourAstreriod:hover,
+.generate:hover,
+.launchButton:hover {
+  background: linear-gradient(135deg, var(--accentColor), #fff);
+  color: #0a0a0f;
+  transform: scale(1.05);
+  box-shadow: 0 0px 20px var(--glowColor);
+}
+
+
+/* .dystriodEarthBtn no longer needs a special override; it uses the unified hover above. */
+
+/* Page Four */
+.titlePageDystriod,
+.titlePageSave {
+  text-align: center;
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin: 50px auto;
+  text-shadow: 0 0 30px var(--glowColor);
+}
+
+.containerDystriod {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-evenly;
+  gap: 30px;
+  flex-wrap: wrap;
+  padding: 40px 20px;
+}
+
+/* Page Five - Simulation */
+.containerFive {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  padding: 20px;
+  align-items: center;
+}
+
+.containerFiveInputs {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 30px;
+  background: var(--cardBg);
+  border-radius: 20px;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Input Styling */
+.diameter,
+.velocity,
+.latitude,
+.longitude,
+.asteroidSelect {
+  background: rgba(55, 43, 124, 0.5);
+  border: 2px solid var(--accentColor);
+  border-radius: 10px;
+  padding: 15px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.diameter:focus,
+.velocity:focus,
+.latitude:focus,
+.longitude:focus,
+.asteroidSelect:focus {
+  outline: none;
+  border-color: #fff;
+  box-shadow: 0 0 20px var(--glowColor);
+  background: rgba(55, 43, 124, 0.8);
+}
+
+.asteroidSelect {
+  cursor: pointer;
+}
+
+.asteroidSelect option {
+  background: #1a1635;
+  color: black;
+}
+
+/* Input Labels */
+.containerDiamter,
+.containerVelocity,
+.containerLatitude,
+.containerLongitude {
+  position: relative;
+}
+
+.containerDiamter::after {
+  content: "km";
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--accentColor);
+  font-weight: bold;
+  pointer-events: none;
+}
+
+.containerVelocity::after {
+  content: "km/s";
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--accentColor);
+  font-weight: bold;
+  pointer-events: none;
+}
+
+.containerLatitude::after,
+.containerLongitude::after {
+  content: "°";
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--accentColor);
+  font-weight: bold;
+  font-size: 1.2rem;
+  pointer-events: none;
+}
+
+/* Earth Video Animation */
+.containerAnmations {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Earth {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 40px;
+    filter: drop-shadow(0 0 45px var(--dangerColor));
+    animation: pulse 3s ease-in-out infinite;
+}
+
+/* Loading State */
+.loadingPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 40px;
+}
+
+.loadingVideo {
+  width: 100%;
+}
+
+.loadingText {
+  font-size: 1.2rem;
+  color: var(--accentColor);
+  animation: blink 1.5s ease-in-out infinite;
+}
+
+/* Results Display */
+.results {
+  background: var(--cardBg);
+  border-radius: 20px;
+  padding: 30px;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--accentColor);
+  animation: slideIn 0.5s ease-out;
+}
+
+.result-group h2 {
+  color: var(--accentColor);
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+.result-group p,
+.result-group h3 {
+  margin: 15px 0;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  border-left: 3px solid var(--accentColor);
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+}
+
+.map-container {
+  margin-top: 20px;
+  border: 2px solid var(--accentColor);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+}
+
+/* Text Colors */
+.text-danger {
+  color: var(--dangerColor);
+}
+
+.text-info {
+  color: var(--accentColor);
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .containerFive {
+    grid-template-columns: 1fr;
+  }
+
+  .videosChoise {
+    grid-template-columns: 1fr;
+  }
+
+  .buttonsEarth {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .maintitle {
+    width: 95%;
+  }
+
+  .containerDystriod {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+/* Animations */
+@keyframes updown {
+  0%, 100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, -15px);
+  }
+}
+
+@keyframes boom {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  60% {
+    opacity: 0.9;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes meteor {
+  0% {
+    top: -10%;
+    right: -10%;
+    opacity: 0;
+  }
+  1% {
+    opacity: 1;
+  }
+  100% {
+    top: 110%;
+    right: 110%;
+    opacity: 0;
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    text-shadow: 0 0 10px var(--accentColor);
+  }
+  50% {
+    text-shadow: 0 0 30px var(--accentColor), 0 0 50px var(--accentColor);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 20px var(--dangerColor));
+  }
+  50% {
+    filter: drop-shadow(0 0 40px var(--dangerColor));
+  }
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Save Scenarios Section */
+.saveDescription {
+  text-align: center;
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  margin: 30px auto;
+  padding: 20px;
+  background: var(--cardBg);
+  border-radius: 15px;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--accentColor);
+  max-width: 800px;
+}
+
+.scenariosContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.scenarioCard {
+  background: var(--cardBg);
+  border-radius: 15px;
+  padding: 25px;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(0, 212, 255, 0.3);
+  transition: all 0.4s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.scenarioCard::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(0, 212, 255, 0.1),
+    transparent
+  );
+  transform: rotate(45deg);
+  transition: all 0.6s ease;
+}
+
+.scenarioCard:hover,
+.addYourAstreriod:hover {
+  border-color: var(--accentColor);
+  box-shadow: 0 0 40px var(--glowColor);
+}
+
+.scenarioCard:hover::before {
+  left: 100%;
+}
+
+.scenarioCard h3 {
+  color: var(--accentColor);
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.scenarioDesc {
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+  line-height: 1.6;
+  margin-bottom: 20px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.selectScenarioBtn {
+  width: 100%;
+  background: var(--mainRadial);
+  border: 2px solid var(--accentColor);
+  border-radius: 10px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--maincolor);
+}
+
+.selectScenarioBtn:hover {
+  background: linear-gradient(135deg, var(--accentColor), #fff);
+  color: #0a0a0f;
+  transform: scale(1.05);
+  box-shadow: 0 0 20px var(--glowColor);
+}
+
+/* Page Six - Scenario Simulation */
+.pageSix {
+  padding: 40px 20px;
+}
+
+.scenarioTitle {
+  text-align: center;
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin: 30px auto;
+  color: var(--accentColor);
+  text-shadow: 0 0 30px var(--glowColor);
+}
+
+.scenarioMessage {
+  background: var(--cardBg);
+  border-radius: 15px;
+  padding: 30px;
+  margin: 30px auto;
+  max-width: 800px;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 2px solid var(--accentColor);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+}
+
+.messageText {
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  line-height: 1.8;
+  text-align: center;
+  color: var(--maincolor);
+  min-height: 60px;
+}
+
+.locationContainer {
+  background: var(--cardBg);
+  border-radius: 15px;
+  padding: 30px;
+  margin: 30px auto;
+  max-width: 600px;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.locationContainer h3 {
+  text-align: center;
+  color: var(--accentColor);
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+}
+
+.scenarioResults {
+  margin: 30px auto;
+  max-width: 900px;
+}
+
+.successCard {
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(55, 43, 124, 0.3));
+  border-radius: 20px;
+  padding: 40px;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 2px solid var(--accentColor);
+  box-shadow: 0 0 50px var(--glowColor);
+  animation: successPulse 2s ease-in-out infinite;
+}
+
+.successTitle {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  color: #00ff88;
+  text-shadow: 0 0 20px rgba(0, 255, 136, 0.8);
+  margin-bottom: 30px;
+}
+
+.impactData {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+  padding: 25px;
+  margin: 20px 0;
+}
+
+.impactData p {
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  margin: 12px 0;
+  padding: 12px;
+  background: rgba(0, 212, 255, 0.05);
+  border-radius: 8px;
+  border-left: 3px solid var(--accentColor);
+}
+
+.success-text {
+  color: #00ff88 !important;
+  border-left-color: #00ff88 !important;
+  font-weight: bold;
+}
+
+.videosSave {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .scenariosContainer {
+    grid-template-columns: 1fr;
+  }
+  
+  .scenarioCard {
+    padding: 20px;
+  }
+  
+  .locationContainer {
+    padding: 20px;
+  }
+  
+  .successCard {
+    padding: 25px;
+  }
+}
+
+/* Additional Animations */
+@keyframes successPulse {
+  0%, 100% {
+    box-shadow: 0 0 50px var(--glowColor);
+  }
+  50% {
+    box-shadow: 0 0 70px rgba(0, 255, 136, 0.6);
+  }
+}

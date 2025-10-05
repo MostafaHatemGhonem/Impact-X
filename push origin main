@@ -1,0 +1,175 @@
+[33mcommit 06581396169e60c48210f3a0ff0171531b246ff9[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: MostafaHatem2 <hatmmstfy536@gmail.com>
+Date:   Sun Oct 5 23:18:37 2025 +0300
+
+    Add big video with Git LFS
+
+ .gitattributes                                                    |     1 [32m+[m
+ bootstrap-5.3.7-dist/css/bootstrap-grid.css                       |  4085 [32m+++++++++++++++++++++++++++++++++++++[m
+ bootstrap-5.3.7-dist/css/bootstrap-grid.css.map                   |     1 [32m+[m
+ bootstrap-5.3.7-dist/css/bootstrap-grid.min.css                   |     6 [32m+[m
+ bootstrap-5.3.7-dist/css/bootstrap-grid.min.css.map               |     1 [32m+[m
+ bootstrap-5.3.7-dist/css/bootstrap-grid.rtl.css                   |  4084 [32m+++++++++++++++++++++++++++++++++++++[m
+ bootstrap-5.3.7-dist/css/bootstrap-grid.rtl.css.map               |     1 [32m+[m
+ bootstrap-5.3.7-dist/css/bootstrap-grid.rtl.min.css               |     6 [32m+[m
+ bootstrap-5.3.7-dist/css/bootstrap-grid.rtl.min.css.map           |     1 [32m+[m
+ bootstrap-5.3.7-dist/css/bootstrap-reboot.css                     |   597 [32m++++++[m
+ bootstrap-5.3.7-dist/css/bootstrap-reboot.css.map                 |     1 [32m+[m
+ bootstrap-5.3.7-dist/css/bootstrap-reboot.min.css                 |     6 [32m+[m
+ bootstrap-5.3.7-dist/css/bootstrap-reboot.min.css.map             |     1 [32m+[m
+ bootstrap-5.3.7-dist/css/bootstrap-reboot.rtl.css                 |   594 [32m++++++[m
+ bootstrap-5.3.7-dist/css/bootstrap-reboot.rtl.css.map             |     1 [32m+[m
+ bootstrap-5.3.7-dist/css/bootstrap-reboot.rtl.min.css             |     6 [32m+[m
+ bootstrap-5.3.7-dist/css/bootstrap-reboot.rtl.min.css.map         |     1 [32m+[m
+ bootstrap-5.3.7-dist/css/bootstrap-utilities.css                  |  5406 [32m+++++++++++++++++++++++++++++++++++++++++++++++++[m
+ bootstrap-5.3.7-dist/css/bootstrap-utilities.css.map              |     1 [32m+[m
+ bootstrap-5.3.7-dist/css/bootstrap-utilities.min.css              |     6 [32m+[m
+ bootstrap-5.3.7-dist/css/bootstrap-utilities.min.css.map          |     1 [32m+[m
+ bootstrap-5.3.7-dist/css/bootstrap-utilities.rtl.css              |  5397 [32m++++++++++++++++++++++++++++++++++++++++++++++++[m
+ bootstrap-5.3.7-dist/css/bootstrap-utilities.rtl.css.map          |     1 [32m+[m
+ bootstrap-5.3.7-dist/css/bootstrap-utilities.rtl.min.css          |     6 [32m+[m
+ bootstrap-5.3.7-dist/css/bootstrap-utilities.rtl.min.css.map      |     1 [32m+[m
+ bootstrap-5.3.7-dist/css/bootstrap.css                            | 12043 [32m++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++[m
+ bootstrap-5.3.7-dist/css/bootstrap.css.map                        |     1 [32m+[m
+ bootstrap-5.3.7-dist/css/bootstrap.min.css                        |     6 [32m+[m
+ bootstrap-5.3.7-dist/css/bootstrap.min.css.map                    |     1 [32m+[m
+ bootstrap-5.3.7-dist/css/bootstrap.rtl.css                        | 12016 [32m+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++[m
+ bootstrap-5.3.7-dist/css/bootstrap.rtl.css.map                    |     1 [32m+[m
+ bootstrap-5.3.7-dist/css/bootstrap.rtl.min.css                    |     6 [32m+[m
+ bootstrap-5.3.7-dist/css/bootstrap.rtl.min.css.map                |     1 [32m+[m
+ bootstrap-5.3.7-dist/js/bootstrap.bundle.js                       |  6315 [32m+++++++++++++++++++++++++++++++++++++++++++++++++++++++++[m
+ bootstrap-5.3.7-dist/js/bootstrap.bundle.js.map                   |     1 [32m+[m
+ bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js                   |     7 [32m+[m
+ bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js.map               |     1 [32m+[m
+ bootstrap-5.3.7-dist/js/bootstrap.esm.js                          |  4450 [32m++++++++++++++++++++++++++++++++++++++++[m
+ bootstrap-5.3.7-dist/js/bootstrap.esm.js.map                      |     1 [32m+[m
+ bootstrap-5.3.7-dist/js/bootstrap.esm.min.js                      |     7 [32m+[m
+ bootstrap-5.3.7-dist/js/bootstrap.esm.min.js.map                  |     1 [32m+[m
+ bootstrap-5.3.7-dist/js/bootstrap.js                              |  4497 [32m++++++++++++++++++++++++++++++++++++++++[m
+ bootstrap-5.3.7-dist/js/bootstrap.js.map                          |     1 [32m+[m
+ bootstrap-5.3.7-dist/js/bootstrap.min.js                          |     7 [32m+[m
+ bootstrap-5.3.7-dist/js/bootstrap.min.js.map                      |     1 [32m+[m
+ infinity ex 2.pdf                                                 |   Bin [31m0[m -> [32m10112059[m bytes
+ requirements.txt                                                  |    10 [32m+[m
+ src/.env                                                          |     1 [32m+[m
+ src/.envExample                                                   |     1 [32m+[m
+ src/__pycache__/__init__.cpython-312.pyc                          |   Bin [31m0[m -> [32m146[m bytes
+ src/__pycache__/app.cpython-312.pyc                               |   Bin [31m0[m -> [32m4837[m bytes
+ src/__pycache__/app.cpython-313.pyc                               |   Bin [31m0[m -> [32m5009[m bytes
+ src/__pycache__/calculations.cpython-312.pyc                      |   Bin [31m0[m -> [32m4286[m bytes
+ src/__pycache__/calculations.cpython-313.pyc                      |   Bin [31m0[m -> [32m4188[m bytes
+ src/__pycache__/run.cpython-312.pyc                               |   Bin [31m0[m -> [32m1487[m bytes
+ src/__pycache__/simulation.cpython-312.pyc                        |   Bin [31m0[m -> [32m6933[m bytes
+ src/__pycache__/simulation.cpython-313.pyc                        |   Bin [31m0[m -> [32m696[m bytes
+ src/app.py                                                        |   136 [32m++[m
+ src/calculations.py                                               |   159 [32m++[m
+ src/run.py                                                        |    47 [32m+[m
+ src/simulation.py                                                 |   190 [32m++[m
+ tsconfig.json                                                     |    32 [32m+[m
+ web/assit/Font/Montserrat.zip                                     |   Bin [31m0[m -> [32m7472491[m bytes
+ web/assit/Font/Montserrat/Montserrat-Italic-VariableFont_wght.ttf |   Bin [31m0[m -> [32m701156[m bytes
+ web/assit/Font/Montserrat/Montserrat-VariableFont_wght.ttf        |   Bin [31m0[m -> [32m688600[m bytes
+ web/assit/Font/Montserrat/OFL.txt                                 |    93 [32m+[m
+ web/assit/Font/Montserrat/README.txt                              |    81 [32m+[m
+ web/assit/Font/Montserrat/static/Montserrat-Black.ttf             |   Bin [31m0[m -> [32m343296[m bytes
+ web/assit/Font/Montserrat/static/Montserrat-BlackItalic.ttf       |   Bin [31m0[m -> [32m348396[m bytes
+ web/assit/Font/Montserrat/static/Montserrat-Bold.ttf              |   Bin [31m0[m -> [32m335788[m bytes
+ web/assit/Font/Montserrat/static/Montserrat-BoldItalic.ttf        |   Bin [31m0[m -> [32m342016[m bytes
+ web/assit/Font/Montserrat/static/Montserrat-ExtraBold.ttf         |   Bin [31m0[m -> [32m344052[m bytes
+ web/assit/Font/Montserrat/static/Montserrat-ExtraBoldItalic.ttf   |   Bin [31m0[m -> [32m348532[m bytes
+ web/assit/Font/Montserrat/static/Montserrat-ExtraLight.ttf        |   Bin [31m0[m -> [32m330488[m bytes
+ web/assit/Font/Montserrat/static/Montserrat-ExtraLightItalic.ttf  |   Bin [31m0[m -> [32m336808[m bytes
+ web/assit/Font/Montserrat/static/Montserrat-Italic.ttf            |   Bin [31m0[m -> [32m337132[m bytes
+ web/assit/Font/Montserrat/static/Montserrat-Light.ttf             |   Bin [31m0[m -> [32m330888[m bytes
+ web/assit/Font/Montserrat/static/Montserrat-LightItalic.ttf       |   Bin [31m0[m -> [32m337208[m bytes
+ web/assit/Font/Montserrat/static/Montserrat-Medium.ttf            |   Bin [31m0[m -> [32m330872[m bytes
+ web/assit/Font/Montserrat/static/Montserrat-MediumItalic.ttf      |   Bin [31m0[m -> [32m337092[m bytes
+ web/assit/Font/Montserrat/static/Montserrat-Regular.ttf           |   Bin [31m0[m -> [32m330948[m bytes
+ web/assit/Font/Montserrat/static/Montserrat-SemiBold.ttf          |   Bin [31m0[m -> [32m333988[m bytes
+ web/assit/Font/Montserrat/static/Montserrat-SemiBoldItalic.ttf    |   Bin [31m0[m -> [32m339028[m bytes
+ web/assit/Font/Montserrat/static/Montserrat-Thin.ttf              |   Bin [31m0[m -> [32m329864[m bytes
+ web/assit/Font/Montserrat/static/Montserrat-ThinItalic.ttf        |   Bin [31m0[m -> [32m336148[m bytes
+ web/assit/Images/Meteor.png                                       |   Bin [31m0[m -> [32m131463[m bytes
+ web/assit/Images/Screenshot from 2025-10-02 17-47-28.png          |   Bin [31m0[m -> [32m11975[m bytes
+ web/assit/Images/Untitled.jpeg                                    |   Bin [31m0[m -> [32m393482[m bytes
+ web/assit/Images/Untitled2.jpeg                                   |   Bin [31m0[m -> [32m83385[m bytes
+ web/assit/Images/bg.jpg                                           |   Bin [31m0[m -> [32m129235[m bytes
+ web/assit/Images/pg.png                                           |   Bin [31m0[m -> [32m1405462[m bytes
+ web/assit/Images/stars.jpeg                                       |   Bin [31m0[m -> [32m301104[m bytes
+ web/assit/Images/stars.png                                        |   Bin [31m0[m -> [32m627673[m bytes
+ web/assit/Images/starsScreen.png                                  |   Bin [31m0[m -> [32m60147[m bytes
+ web/assit/videos/3657852753-preview.mp4                           |     3 [32m+[m
+ web/assit/videos/Earth - 28049.mp4                                |     3 [32m+[m
+ web/assit/videos/Earth destroyed.mp4                              |     3 [32m+[m
+ web/assit/videos/Earth-28049-unscreen.gif                         |   Bin [31m0[m -> [32m8040649[m bytes
+ web/assit/videos/EarthSave.mp4                                    |     3 [32m+[m
+ web/assit/videos/Earth_wAtmos_spin_02_2160p30.mp4                 |   Bin [31m128742951[m -> [32m0[m bytes
+ web/assit/videos/planet-star.gif                                  |   Bin [31m0[m -> [32m34822[m bytes
+ web/bootstrap-5.3.7-dist/css/bootstrap-grid.css                   |  4085 [32m+++++++++++++++++++++++++++++++++++++[m
+ web/bootstrap-5.3.7-dist/css/bootstrap-grid.css.map               |     1 [32m+[m
+ web/bootstrap-5.3.7-dist/css/bootstrap-grid.min.css               |     6 [32m+[m
+ web/bootstrap-5.3.7-dist/css/bootstrap-grid.min.css.map           |     1 [32m+[m
+ web/bootstrap-5.3.7-dist/css/bootstrap-grid.rtl.css               |  4084 [32m+++++++++++++++++++++++++++++++++++++[m
+ web/bootstrap-5.3.7-dist/css/bootstrap-grid.rtl.css.map           |     1 [32m+[m
+ web/bootstrap-5.3.7-dist/css/bootstrap-grid.rtl.min.css           |     6 [32m+[m
+ web/bootstrap-5.3.7-dist/css/bootstrap-grid.rtl.min.css.map       |     1 [32m+[m
+ web/bootstrap-5.3.7-dist/css/bootstrap-reboot.css                 |   597 [32m++++++[m
+ web/bootstrap-5.3.7-dist/css/bootstrap-reboot.css.map             |     1 [32m+[m
+ web/bootstrap-5.3.7-dist/css/bootstrap-reboot.min.css             |     6 [32m+[m
+ web/bootstrap-5.3.7-dist/css/bootstrap-reboot.min.css.map         |     1 [32m+[m
+ web/bootstrap-5.3.7-dist/css/bootstrap-reboot.rtl.css             |   594 [32m++++++[m
+ web/bootstrap-5.3.7-dist/css/bootstrap-reboot.rtl.css.map         |     1 [32m+[m
+ web/bootstrap-5.3.7-dist/css/bootstrap-reboot.rtl.min.css         |     6 [32m+[m
+ web/bootstrap-5.3.7-dist/css/bootstrap-reboot.rtl.min.css.map     |     1 [32m+[m
+ web/bootstrap-5.3.7-dist/css/bootstrap-utilities.css              |  5406 [32m+++++++++++++++++++++++++++++++++++++++++++++++++[m
+ web/bootstrap-5.3.7-dist/css/bootstrap-utilities.css.map          |     1 [32m+[m
+ web/bootstrap-5.3.7-dist/css/bootstrap-utilities.min.css          |     6 [32m+[m
+ web/bootstrap-5.3.7-dist/css/bootstrap-utilities.min.css.map      |     1 [32m+[m
+ web/bootstrap-5.3.7-dist/css/bootstrap-utilities.rtl.css          |  5397 [32m++++++++++++++++++++++++++++++++++++++++++++++++[m
+ web/bootstrap-5.3.7-dist/css/bootstrap-utilities.rtl.css.map      |     1 [32m+[m
+ web/bootstrap-5.3.7-dist/css/bootstrap-utilities.rtl.min.css      |     6 [32m+[m
+ web/bootstrap-5.3.7-dist/css/bootstrap-utilities.rtl.min.css.map  |     1 [32m+[m
+ web/bootstrap-5.3.7-dist/css/bootstrap.css                        | 12043 [32m++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++[m
+ web/bootstrap-5.3.7-dist/css/bootstrap.css.map                    |     1 [32m+[m
+ web/bootstrap-5.3.7-dist/css/bootstrap.min.css                    |     6 [32m+[m
+ web/bootstrap-5.3.7-dist/css/bootstrap.min.css.map                |     1 [32m+[m
+ web/bootstrap-5.3.7-dist/css/bootstrap.rtl.css                    | 12016 [32m+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++[m
+ web/bootstrap-5.3.7-dist/css/bootstrap.rtl.css.map                |     1 [32m+[m
+ web/bootstrap-5.3.7-dist/css/bootstrap.rtl.min.css                |     6 [32m+[m
+ web/bootstrap-5.3.7-dist/css/bootstrap.rtl.min.css.map            |     1 [32m+[m
+ web/bootstrap-5.3.7-dist/js/bootstrap.bundle.js                   |  6315 [32m+++++++++++++++++++++++++++++++++++++++++++++++++++++++++[m
+ web/bootstrap-5.3.7-dist/js/bootstrap.bundle.js.map               |     1 [32m+[m
+ web/bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js               |     7 [32m+[m
+ web/bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js.map           |     1 [32m+[m
+ web/bootstrap-5.3.7-dist/js/bootstrap.esm.js                      |  4450 [32m++++++++++++++++++++++++++++++++++++++++[m
+ web/bootstrap-5.3.7-dist/js/bootstrap.esm.js.map                  |     1 [32m+[m
+ web/bootstrap-5.3.7-dist/js/bootstrap.esm.min.js                  |     7 [32m+[m
+ web/bootstrap-5.3.7-dist/js/bootstrap.esm.min.js.map              |     1 [32m+[m
+ web/bootstrap-5.3.7-dist/js/bootstrap.js                          |  4497 [32m++++++++++++++++++++++++++++++++++++++++[m
+ web/bootstrap-5.3.7-dist/js/bootstrap.js.map                      |     1 [32m+[m
+ web/bootstrap-5.3.7-dist/js/bootstrap.min.js                      |     7 [32m+[m
+ web/bootstrap-5.3.7-dist/js/bootstrap.min.js.map                  |     1 [32m+[m
+ web/dist/script.js                                                |   674 [32m++++++[m
+ web/dist/script.js.map                                            |     1 [32m+[m
+ web/script.ts                                                     |   811 [32m++++++++[m
+ 148 files changed, 121399 insertions(+)
+
+[33mcommit 098f2ed19f7e700706fc920a5342cb221f80c164[m
+Author: MostafaHatem2 <hatmmstfy536@gmail.com>
+Date:   Sun Oct 5 22:48:09 2025 +0300
+
+    addOne
+
+ web/index.html |  69 [32m+++++++++++++[m
+ web/style.css  | 853 [32m+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++[m
+ 2 files changed, 922 insertions(+)
+
+[33mcommit 443de20e7ac370fcdf759c5f33d1d44035dae585[m
+Author: MostafaHatem2 <hatmmstfy536@gmail.com>
+Date:   Sun Oct 5 22:24:18 2025 +0300
+
+    bigVideos
+
+ .gitattributes                                    |   1 [32m+[m
+ web/assit/videos/Earth_wAtmos_spin_02_2160p30.mp4 | Bin [31m0[m -> [32m128742951[m bytes
+ 2 files changed, 1 insertion(+)

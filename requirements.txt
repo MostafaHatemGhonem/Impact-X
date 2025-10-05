@@ -1,0 +1,10 @@
+requests
+pywebview
+pandas
+folium
+plotly
+python-dotenv
+shapely
+PyQt5
+PyQtWebEngine
+flask
