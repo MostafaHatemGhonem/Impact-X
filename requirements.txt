@@ -8,3 +8,4 @@ shapely
 PyQt5
 PyQtWebEngine
 flask
+flask-cors

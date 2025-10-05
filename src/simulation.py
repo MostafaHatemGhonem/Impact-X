@@ -83,13 +83,76 @@ def generate_map_html(latitude, longitude, damage_radius_km):
         import traceback
         traceback.print_exc()
         return f"<p>Error generating map: {str(e)}</p>"
+def calculate_earthquake_decay_radius(magnitude, target_magnitude):
+    """Calculate the radius where earthquake decays to target magnitude."""
+    # Simple logarithmic decay model - adjust coefficients as needed
+    return 10 ** ((magnitude - target_magnitude) * 0.5) * 10  # in km
+
 def generate_detailed_map_html(latitude, longitude, damage_radii_dict, earthquake_magnitude=7.0):
     try:
         if not isinstance(damage_radii_dict, dict):
             print(f"Warning: damage_radii_dict is not a dict, got {type(damage_radii_dict)}")
             return generate_map_html(latitude, longitude, 0)
 
+        # Create map with OpenStreetMap base layer
         impact_map = folium.Map(location=[latitude, longitude], zoom_start=8, tiles='OpenStreetMap')
+        
+        # Add the main red danger zone (most prominent feature)
+        danger_radius_km = damage_radii_dict.get('severe_damage_km', 0) * 1.5
+        if danger_radius_km > 0:
+            # Main danger zone (red)
+            folium.Circle(
+                location=[latitude, longitude],
+                radius=danger_radius_km * 1000,  # Convert km to meters
+                popup=(
+                    f'<b>DANGER ZONE</b><br>'
+                    f'<b>Earthquake Magnitude:</b> {earthquake_magnitude:.1f} Richter<br>'
+                    f'<b>Radius:</b> {danger_radius_km:.1f} km<br>'
+                    f'<b>Effects:</b> Severe structural damage, potential collapses'
+                ),
+                tooltip='Extreme Danger Area - Evacuation Recommended',
+                color='#ff0000',  # Bright red
+                fill=True,
+                fill_color='#ff0000',
+                fill_opacity=0.15,
+                weight=3
+            ).add_to(impact_map)
+            
+            # Add wind intensity zones
+            wind_radius_km = danger_radius_km * 1.8
+            folium.Circle(
+                location=[latitude, longitude],
+                radius=wind_radius_km * 1000,
+                popup=(
+                    f'<b>HIGH WIND ZONE</b><br>'
+                    f'<b>Wind Speed:</b> 200+ km/h<br>'
+                    f'<b>Effects:</b> Widespread damage, uprooted trees, structural damage'
+                ),
+                tooltip='High Wind Zone',
+                color='#ffa500',  # Orange
+                fill=True,
+                fill_color='#ffa500',
+                fill_opacity=0.1,
+                weight=2,
+                dash_array='5, 5'
+            ).add_to(impact_map)
+            
+            # Add moderate impact zone
+            mod_radius_km = danger_radius_km * 0.7
+            folium.Circle(
+                location=[latitude, longitude],
+                radius=mod_radius_km * 1000,
+                popup=(
+                    f'<b>MODERATE IMPACT ZONE</b><br>'
+                    f'<b>Effects:</b> Partial building collapse, fires, severe injuries likely'
+                ),
+                tooltip='Moderate Impact Zone',
+                color='#ff4500',  # OrangeRed
+                fill=True,
+                fill_color='#ff4500',
+                fill_opacity=0.25,
+                weight=2
+            ).add_to(impact_map)
 
         # Earthquake decay circles
         earthquake_magnitudes_to_show = [6.0, 5.0, 4.0]
