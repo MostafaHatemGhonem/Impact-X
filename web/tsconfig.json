@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    /* File Layout */
+    "rootDir": ".",
+    "outDir": "./dist",
+
+    /* Environment Settings */
+    "target": "es2020",              // Modern browser support
+    "module": "es2020",              // ES modules for modern web
+    "lib": ["dom", "es2020"],        // DOM + ES2020 APIs support
+    "moduleResolution": "bundler",   // For web projects
+
+    /* Output Options */
+    "sourceMap": true,               // For easier debugging
+    "declaration": false,            // No need for .d.ts in web projects
+    "declarationMap": false,
+
+    /* Type Checking */
+    "strict": true,                  // Strict type checking
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+
+    /* Performance */
+    "skipLibCheck": true,            // Faster compilation
+
+    /* Module / Syntax */
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true
+  },
+  "include": ["./**/*.ts"],          // Include all TS files in current directory and subdirectories
+  "exclude": ["node_modules"]        // Exclude node_modules
+}

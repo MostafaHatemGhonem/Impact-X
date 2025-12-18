@@ -1,5 +1,6 @@
 import folium
 from folium import plugins
+import math
 
 
 def generate_map_html(latitude, longitude, damage_radius_km):
@@ -15,20 +16,17 @@ def generate_map_html(latitude, longitude, damage_radius_km):
         str: HTML string of the generated map
     """
     try:
-        # If damage_radius_km is a dict, extract the moderate damage value
         if isinstance(damage_radius_km, dict):
             radius = damage_radius_km.get('moderate_damage_km', 0)
         else:
             radius = damage_radius_km
         
-        # Create a map centered on the impact location
         impact_map = folium.Map(
             location=[latitude, longitude],
             zoom_start=8,
             tiles='OpenStreetMap'
         )
         
-        # Add a marker at the impact point
         folium.Marker(
             location=[latitude, longitude],
             popup=f'Impact Point<br>Lat: {latitude}<br>Lon: {longitude}',
@@ -36,11 +34,10 @@ def generate_map_html(latitude, longitude, damage_radius_km):
             icon=folium.Icon(color='red', icon='info-sign')
         ).add_to(impact_map)
         
-        # Add a circle showing the damage radius
         if radius and radius > 0:
             folium.Circle(
                 location=[latitude, longitude],
-                radius=radius * 1000,  # Convert km to meters
+                radius=radius * 1000,
                 popup=f'Moderate Damage Radius: {radius:.2f} km',
                 color='red',
                 fill=True,
@@ -49,7 +46,6 @@ def generate_map_html(latitude, longitude, damage_radius_km):
                 weight=2
             ).add_to(impact_map)
             
-            # Add a second circle for severe damage (smaller radius)
             severe_damage_radius = radius * 0.5
             folium.Circle(
                 location=[latitude, longitude],
@@ -62,7 +58,6 @@ def generate_map_html(latitude, longitude, damage_radius_km):
                 weight=2
             ).add_to(impact_map)
         
-        # Add fullscreen button
         plugins.Fullscreen(
             position='topright',
             title='Expand map',
@@ -70,11 +65,9 @@ def generate_map_html(latitude, longitude, damage_radius_km):
             force_separate_button=True
         ).add_to(impact_map)
         
-        # Add mouse position display
         plugins.MousePosition().add_to(impact_map)
         
-        # Generate HTML
-        map_html = impact_map._repr_html_()
+        map_html = impact_map.repr_html()
         
         return map_html
     
@@ -83,125 +76,84 @@ def generate_map_html(latitude, longitude, damage_radius_km):
         import traceback
         traceback.print_exc()
         return f"<p>Error generating map: {str(e)}</p>"
+
+
 def calculate_earthquake_decay_radius(magnitude, target_magnitude):
     """Calculate the radius where earthquake decays to target magnitude."""
-    # Simple logarithmic decay model - adjust coefficients as needed
-    return 10 ** ((magnitude - target_magnitude) * 0.5) * 10  # in km
+    return 10 ** ((magnitude - target_magnitude) * 0.5) * 10
+
 
 def generate_detailed_map_html(latitude, longitude, damage_radii_dict, earthquake_magnitude=7.0):
     try:
         if not isinstance(damage_radii_dict, dict):
             print(f"Warning: damage_radii_dict is not a dict, got {type(damage_radii_dict)}")
-            return generate_map_html(latitude, longitude, 0)
+            return folium.Map(location=[latitude, longitude], zoom_start=8).get_root().render()
 
-        # Create map with OpenStreetMap base layer
         impact_map = folium.Map(location=[latitude, longitude], zoom_start=8, tiles='OpenStreetMap')
         
-        # Add the main red danger zone (most prominent feature)
-        danger_radius_km = damage_radii_dict.get('severe_damage_km', 0) * 1.5
-        if danger_radius_km > 0:
-            # Main danger zone (red)
-            folium.Circle(
-                location=[latitude, longitude],
-                radius=danger_radius_km * 1000,  # Convert km to meters
-                popup=(
-                    f'<b>DANGER ZONE</b><br>'
-                    f'<b>Earthquake Magnitude:</b> {earthquake_magnitude:.1f} Richter<br>'
-                    f'<b>Radius:</b> {danger_radius_km:.1f} km<br>'
-                    f'<b>Effects:</b> Severe structural damage, potential collapses'
-                ),
-                tooltip='Extreme Danger Area - Evacuation Recommended',
-                color='#ff0000',  # Bright red
-                fill=True,
-                fill_color='#ff0000',
-                fill_opacity=0.15,
-                weight=3
-            ).add_to(impact_map)
-            
-            # Add wind intensity zones
-            wind_radius_km = danger_radius_km * 1.8
-            folium.Circle(
-                location=[latitude, longitude],
-                radius=wind_radius_km * 1000,
-                popup=(
-                    f'<b>HIGH WIND ZONE</b><br>'
-                    f'<b>Wind Speed:</b> 200+ km/h<br>'
-                    f'<b>Effects:</b> Widespread damage, uprooted trees, structural damage'
-                ),
-                tooltip='High Wind Zone',
-                color='#ffa500',  # Orange
-                fill=True,
-                fill_color='#ffa500',
-                fill_opacity=0.1,
-                weight=2,
-                dash_array='5, 5'
-            ).add_to(impact_map)
-            
-            # Add moderate impact zone
-            mod_radius_km = danger_radius_km * 0.7
-            folium.Circle(
-                location=[latitude, longitude],
-                radius=mod_radius_km * 1000,
-                popup=(
-                    f'<b>MODERATE IMPACT ZONE</b><br>'
-                    f'<b>Effects:</b> Partial building collapse, fires, severe injuries likely'
-                ),
-                tooltip='Moderate Impact Zone',
-                color='#ff4500',  # OrangeRed
-                fill=True,
-                fill_color='#ff4500',
-                fill_opacity=0.25,
-                weight=2
-            ).add_to(impact_map)
+        # Collect all circles to be drawn
+        all_circles = []
+
+        # Damage zones
+        damage_zones = [
+            ('total_destruction_km', 'Total Destruction', 'darkred', 0.6),
+            ('severe_damage_km', 'Severe Damage', 'red', 0.4),
+            ('moderate_damage_km', 'Moderate Damage', 'orange', 0.2),
+            ('window_breakage_km', 'Window Breakage', 'yellow', 0.1)
+        ]
+
+        for key, label, color, opacity in damage_zones:
+            if key in damage_radii_dict:
+                radius_km = damage_radii_dict[key]
+                if isinstance(radius_km, (int, float)) and radius_km > 0:
+                    all_circles.append({
+                        'radius_km': radius_km,
+                        'popup': f'<b>{label}</b><br>Radius: {radius_km:.2f} km',
+                        'tooltip': f'{label}: {radius_km:.2f} km',
+                        'color': color,
+                        'fill_color': color,
+                        'fill_opacity': opacity
+                    })
 
         # Earthquake decay circles
-        earthquake_magnitudes_to_show = [6.0, 5.0, 4.0]
+        earthquake_magnitudes_to_show = [7.0, 6.0, 5.0, 4.0]
         for mag in earthquake_magnitudes_to_show:
-            if mag < earthquake_magnitude:
+            if mag <= earthquake_magnitude:
                 radius_km = calculate_earthquake_decay_radius(earthquake_magnitude, mag)
-                folium.Circle(
-                    radius=radius_km * 1000,
-                    location=[latitude, longitude],
-                    popup=f"Magnitude: {mag:.1f} Richter",
-                    tooltip=f"Magnitude: {mag:.1f} Richter",
-                    color='purple',
-                    fill=True,
-                    fillColor='purple',
-                    fillOpacity=0.2,
-                    weight=1
-                ).add_to(impact_map)
+                if radius_km > 0:
+                    all_circles.append({
+                        'radius_km': radius_km,
+                        'popup': f"Magnitude: {mag:.1f} Richter",
+                        'tooltip': f"Magnitude: {mag:.1f} Richter",
+                        'color': 'purple',
+                        'fill_color': 'purple',
+                        'fill_opacity': 0.2
+                    })
 
-        # Impact marker
+        # Sort circles by radius in descending order (largest first)
+        all_circles.sort(key=lambda c: c['radius_km'], reverse=True)
+
+        # Draw the circles from largest to smallest
+        for circle_data in all_circles:
+            folium.Circle(
+                location=[latitude, longitude],
+                radius=circle_data['radius_km'] * 1000,
+                popup=circle_data['popup'],
+                tooltip=circle_data['tooltip'],
+                color=circle_data['color'],
+                fill=True,
+                fillColor=circle_data['fill_color'],
+                fillOpacity=circle_data['fill_opacity'],
+                weight=2
+            ).add_to(impact_map)
+        
+        # Add a main marker at the impact point on top of everything
         folium.Marker(
             location=[latitude, longitude],
             popup=f'<b>Impact Point</b><br>Lat: {latitude}<br>Lon: {longitude}',
             tooltip='Asteroid Impact Location',
             icon=folium.Icon(color='black', icon='warning-sign')
         ).add_to(impact_map)
-
-        # Damage zones
-        damage_zones = [
-            ('window_breakage_km', 'Window Breakage', 'yellow', 0.1),
-            ('moderate_damage_km', 'Moderate Damage', 'orange', 0.2),
-            ('severe_damage_km', 'Severe Damage', 'red', 0.4),
-            ('total_destruction_km', 'Total Destruction', 'darkred', 0.6)
-        ]
-
-        for key, label, color, opacity in reversed(damage_zones):
-            if key in damage_radii_dict:
-                radius_km = damage_radii_dict[key]
-                if isinstance(radius_km, (int, float)) and radius_km > 0:
-                    folium.Circle(
-                        location=[latitude, longitude],
-                        radius=radius_km * 1000,
-                        popup=f'<b>{label}</b><br>Radius: {radius_km:.2f} km',
-                        tooltip=f'{label}: {radius_km:.2f} km',
-                        color=color,
-                        fill=True,
-                        fillColor=color,
-                        fillOpacity=opacity,
-                        weight=2
-                    ).add_to(impact_map)
 
         folium.LayerControl().add_to(impact_map)
         plugins.Fullscreen(position='topright').add_to(impact_map)
@@ -222,7 +174,6 @@ def generate_detailed_map_html(latitude, longitude, damage_radii_dict, earthquak
 
 def calculate_affected_area(damage_radius_km):
     """Calculate the affected area in square kilometers."""
-    import math
     if isinstance(damage_radius_km, (int, float)) and damage_radius_km > 0:
         return math.pi * (damage_radius_km ** 2)
     return 0
@@ -242,8 +193,7 @@ def estimate_population_impact(latitude, longitude, damage_radius_km):
     """
     affected_area_km2 = calculate_affected_area(damage_radius_km)
     
-    # Average global population density
-    avg_pop_density = 60  # people per km²
+    avg_pop_density = 60
     estimated_affected = int(affected_area_km2 * avg_pop_density)
     
     return {

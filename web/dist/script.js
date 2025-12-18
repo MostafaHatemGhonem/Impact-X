@@ -1,4 +1,44 @@
 "use strict";
+// Map instance
+let map = null;
+// Initialize the map with the impact location
+function initMap(lat, lng, impactData) {
+    const mapElement = document.getElementById('impactMap');
+    if (!mapElement)
+        return;
+    // Show the map container
+    mapElement.classList.add('visible');
+    // Initialize the map
+    map = L.map('impactMap').setView([lat, lng], 5);
+    // Add a tile layer (OpenStreetMap)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        maxZoom: 18,
+    }).addTo(map);
+    // Create a custom icon for the impact marker
+    const impactIcon = L.divIcon({
+        className: 'impact-marker',
+        iconSize: [20, 20],
+        iconAnchor: [10, 10],
+        popupAnchor: [0, -10],
+    });
+    // Add the impact marker with a popup
+    const marker = L.marker([lat, lng], { icon: impactIcon }).addTo(map);
+    // Create popup content
+    const popupContent = `
+    <div style="text-align: center;">
+      <h4 style="color: var(--accentColor); margin-bottom: 10px;">Impact Location</h4>
+      <p><strong>Latitude:</strong> ${lat.toFixed(4)}°</p>
+      <p><strong>Longitude:</strong> ${lng.toFixed(4)}°</p>
+      ${impactData.diameter ? `<p><strong>Asteroid Diameter:</strong> ${impactData.diameter} m</p>` : ''}
+      ${impactData.velocity ? `<p><strong>Impact Velocity:</strong> ${impactData.velocity} km/s</p>` : ''}
+    </div>
+  `;
+    // Bind popup to the marker
+    marker.bindPopup(popupContent).openPopup();
+    // Scroll to the map
+    mapElement.scrollIntoView({ behavior: 'smooth' });
+}
 // Flask API Helper - يعمل مع Flask و Pywebview
 const isFlaskMode = !window.pywebview;
 const API = {
@@ -329,11 +369,11 @@ function pageFourDystriod() {
         generate.textContent = "Generate";
         generate.classList.add("generate");
         containerFiveInputs.appendChild(generate);
-        let containerAnmations = document.createElement("div");
-        containerAnmations.classList.add("containerAnmations");
-        let Earth = createVideoElement("./assit/videos/Earth destroyed.mp4", "Earth");
-        containerAnmations.appendChild(Earth);
-        containerFive.appendChild(containerAnmations);
+        // let containerAnmations = document.createElement("div");
+        // containerAnmations.classList.add("containerAnmations");
+        // let Earth = createVideoElement("./assit/videos/Earth destroyed.mp4", "Earth");
+        // containerAnmations.appendChild(Earth);
+        // containerFive.appendChild(containerAnmations);
         pageFive.appendChild(containerFive);
         mainPage.appendChild(pageFive);
         pageFive.scrollIntoView({ behavior: "smooth" });
@@ -358,11 +398,11 @@ function pageFourDystriod() {
             let containerFiveInputs = document.createElement("div");
             containerFiveInputs.classList.add("containerFiveInputs");
             containerFive.appendChild(containerFiveInputs);
-            let containerAnmations = document.createElement("div");
-            containerAnmations.classList.add("containerAnmations");
-            let Earth = createVideoElement("./assit/videos/Earth destroyed.mp4", "Earth");
-            containerAnmations.appendChild(Earth);
-            containerFive.appendChild(containerAnmations);
+            // let containerAnmations = document.createElement("div");
+            // containerAnmations.classList.add("containerAnmations");
+            // let Earth = createVideoElement("./assit/videos/Earth destroyed.mp4", "Earth");
+            // containerAnmations.appendChild(Earth);
+            // containerFive.appendChild(containerAnmations);
             pageFive.appendChild(containerFive);
             mainPage.appendChild(pageFive);
         }
@@ -648,7 +688,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const titlePage2 = pageTwo.querySelector(".titlePage2");
         if (titlePage2) {
             TypingEffect([
-                "Welcome to Meteor Madness Infinity Explorers EG",
+                "Welcome to Impact X Infinity Explorers EG",
                 "We explore the universe together!"
             ], titlePage2, pageTwo);
         }
@@ -657,6 +697,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const dystriodEarthBtn = document.querySelector(".dystriodEarthBtn");
     const saveVideo = document.querySelector(".saveVideo");
     const saveEarthBtn = document.querySelector(".saveEarthBtn");
+    // Function to handle the Save Earth button click
+    async function handleSaveEarth() {
+        // Show the simulation results
+        pageFourSave();
+        // Get the latitude and longitude from the form or use default values
+        const latInput = document.querySelector('input[name="lat"]');
+        const lngInput = document.querySelector('input[name="long"]');
+        const diameterInput = document.querySelector('input[name="diameter"]');
+        const velocityInput = document.querySelector('input[name="velocity"]');
+        // Use form values if available, otherwise use default values
+        const lat = latInput && latInput.value ? parseFloat(latInput.value) : 30.0444; // Default to Cairo
+        const lng = lngInput && lngInput.value ? parseFloat(lngInput.value) : 31.2357; // Default to Cairo
+        const diameter = diameterInput ? diameterInput.value : 'Unknown';
+        const velocity = velocityInput ? velocityInput.value : 'Unknown';
+        // Show the map with the impact location
+        initMap(lat, lng, { diameter, velocity });
+    }
+    // When Save Earth button is clicked
+    saveEarthBtn?.addEventListener('click', handleSaveEarth);
     if (dystriodVideo) {
         dystriodVideo.addEventListener("click", pageFourDystriod);
     }

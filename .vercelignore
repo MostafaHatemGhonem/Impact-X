@@ -1,0 +1,8 @@
+.venv/
+__pycache__/
+node_modules/
+.git/
+bootstrap-5.3.7-dist/
+*.pyc
+.env
+.envExample

@@ -320,9 +320,7 @@ body {
 
 /* Page Five - Simulation */
 .containerFive {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
+  width: 100%;
   padding: 20px;
   align-items: center;
 }

@@ -1,11 +1,6 @@
 requests
-pywebview
-pandas
+# pywebview
 folium
-plotly
 python-dotenv
-shapely
-PyQt5
-PyQtWebEngine
 flask
 flask-cors
